@@ -7,6 +7,7 @@ type CharactersTableProps = {
 };
 
 export function CharactersTable({ search }: CharactersTableProps) {
+  // TODO: add thantstack query to graphql code generator
   const { data, loading, error } = useGetCharactersQuery({
     variables: { filter: { name: search } }
   });
