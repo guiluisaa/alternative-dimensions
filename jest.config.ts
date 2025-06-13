@@ -34,7 +34,15 @@ const config: Config = {
     '/.next/',
     '/storybook/'
   ],
-  verbose: true
+  verbose: true,
+  moduleNameMapper: {
+    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+      '<rootDir>/test/__mocks__/fileMock.ts',
+    '@/(.*)$': '<rootDir>/src/$1',
+    '@graphql': '<rootDir>/src/generated/graphql.tsx',
+
+    '^styled-components': '<rootDir>/node_modules/styled-components'
+  }
 };
 
 export default createJestConfig(config);

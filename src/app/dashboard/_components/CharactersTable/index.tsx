@@ -1,39 +1,9 @@
 'use client';
 
-import { gql, useQuery } from '@apollo/client';
-
-const GET_CHARACTERS = gql`
-  query GetCharacters {
-    characters {
-      info {
-        count
-        next
-        pages
-        prev
-      }
-
-      results {
-        id
-        name
-        gender
-        species
-        image
-      }
-    }
-  }
-`;
-
-// TODO: remove after auto-generated types are added
-export type Character = {
-  id: string;
-  name: string;
-  gender: string;
-  species: string;
-  image: string;
-};
+import { useGetCharactersQuery } from '@/generated/graphql';
 
 export function CharactersTable() {
-  const { data, loading, error } = useQuery(GET_CHARACTERS);
+  const { data, loading, error } = useGetCharactersQuery();
 
   // TODO: add loading state
   if (loading) return <div>Loading...</div>;
@@ -45,9 +15,9 @@ export function CharactersTable() {
     <div>
       <h2>Characters</h2>
 
-      {data.characters.results.map((character: Character) => (
-        <div key={character.id}>
-          <h3>{character.name}</h3>
+      {data?.characters?.results?.map(character => (
+        <div key={character?.id}>
+          <h3>{character?.name}</h3>
         </div>
       ))}
     </div>
