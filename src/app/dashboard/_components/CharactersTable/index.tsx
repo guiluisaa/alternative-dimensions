@@ -1,10 +1,10 @@
 'use client';
 
-import Image from 'next/image';
-
-import { TableCell } from '@ui/TableCell';
+import { TableHeaderCell } from '@ui/TableHeaderCell';
 
 import { useGetCharactersQuery } from '@/generated/graphql';
+
+import { CharacterRow } from '../CharacterRow';
 
 type CharactersTableProps = {
   search: string;
@@ -29,26 +29,14 @@ export function CharactersTable({ search }: CharactersTableProps) {
     <table>
       <thead>
         <tr>
-          <TableCell isHeader />
-          <TableCell isHeader>Name</TableCell>
-          <TableCell isHeader>Location</TableCell>
+          <TableHeaderCell>Avatar</TableHeaderCell>
+          <TableHeaderCell>Name</TableHeaderCell>
+          <TableHeaderCell>Location</TableHeaderCell>
         </tr>
       </thead>
       <tbody>
         {data?.characters?.results?.map(character => (
-          <tr key={character?.id}>
-            <TableCell>
-              <Image
-                src={character?.image ?? ''}
-                alt={character?.name ?? ''}
-                width={50}
-                height={50}
-                style={{ borderRadius: '50%' }}
-              />
-            </TableCell>
-            <TableCell>{character?.name}</TableCell>
-            <TableCell>{character?.location?.name}</TableCell>
-          </tr>
+          <CharacterRow key={character?.id} character={character} />
         ))}
       </tbody>
     </table>
