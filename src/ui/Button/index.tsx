@@ -9,8 +9,8 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
 
 export function Button({
   children,
-  variant = 'secondary',
-  size = 'sm',
+  variant = 'primary',
+  size = 'md',
   ...props
 }: ButtonProps) {
   return (
