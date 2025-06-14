@@ -186,4 +186,168 @@ describe('SearchInput', () => {
 
     expect(mockOnSearch).toHaveBeenLastCalledWith('');
   });
+
+  it('should not show clear button when input is empty', () => {
+    renderWithProviders(<SearchInput onSearch={mockOnSearch} />);
+
+    const clearButton = screen.queryByTestId('SearchInput_clearButton');
+    expect(clearButton).not.toBeInTheDocument();
+  });
+
+  it('should show clear button when input has value and not loading', () => {
+    renderWithProviders(<SearchInput onSearch={mockOnSearch} />);
+
+    const input = screen.getByPlaceholderText('Search for a character');
+    act(() => {
+      fireEvent.change(input, { target: { value: 'rick' } });
+    });
+
+    const clearButton = screen.getByTestId('SearchInput_clearButton');
+    expect(clearButton).toBeInTheDocument();
+  });
+
+  it('should not show clear button when loading even with input value', () => {
+    renderWithProviders(<SearchInput onSearch={mockOnSearch} loading={true} />);
+
+    const input = screen.getByPlaceholderText('Search for a character');
+    act(() => {
+      fireEvent.change(input, { target: { value: 'rick' } });
+    });
+
+    const clearButton = screen.queryByTestId('SearchInput_clearButton');
+    expect(clearButton).not.toBeInTheDocument();
+  });
+
+  it('should clear input value when clear button is clicked', () => {
+    renderWithProviders(<SearchInput onSearch={mockOnSearch} />);
+
+    const input = screen.getByPlaceholderText('Search for a character');
+    act(() => {
+      fireEvent.change(input, { target: { value: 'rick' } });
+    });
+
+    const clearButton = screen.getByTestId('SearchInput_clearButton');
+    act(() => {
+      fireEvent.click(clearButton);
+    });
+
+    expect(input).toHaveValue('');
+  });
+
+  it('should hide clear button after clearing input', () => {
+    renderWithProviders(<SearchInput onSearch={mockOnSearch} />);
+
+    const input = screen.getByPlaceholderText('Search for a character');
+    act(() => {
+      fireEvent.change(input, { target: { value: 'rick' } });
+    });
+
+    const clearButton = screen.getByTestId('SearchInput_clearButton');
+    act(() => {
+      fireEvent.click(clearButton);
+    });
+
+    expect(
+      screen.queryByTestId('SearchInput_clearButton')
+    ).not.toBeInTheDocument();
+  });
+
+  it('should immediately call onSearch with empty string when clear button is clicked', async () => {
+    renderWithProviders(<SearchInput onSearch={mockOnSearch} />);
+
+    const input = screen.getByPlaceholderText('Search for a character');
+
+    act(() => {
+      jest.runAllTimers();
+    });
+    mockOnSearch.mockClear();
+
+    act(() => {
+      fireEvent.change(input, { target: { value: 'rick' } });
+    });
+
+    const clearButton = screen.getByTestId('SearchInput_clearButton');
+    act(() => {
+      fireEvent.click(clearButton);
+    });
+
+    await waitFor(() => {
+      expect(mockOnSearch).toHaveBeenCalledWith('');
+    });
+  });
+
+  it('should cancel pending debounced search when clear button is clicked', async () => {
+    renderWithProviders(<SearchInput onSearch={mockOnSearch} />);
+
+    const input = screen.getByPlaceholderText('Search for a character');
+
+    act(() => {
+      jest.runAllTimers();
+    });
+    mockOnSearch.mockClear();
+
+    act(() => {
+      fireEvent.change(input, { target: { value: 'rick' } });
+    });
+
+    // Wait some time but not the full debounce delay
+    act(() => {
+      jest.advanceTimersByTime(200);
+    });
+
+    const clearButton = screen.getByTestId('SearchInput_clearButton');
+    act(() => {
+      fireEvent.click(clearButton);
+    });
+
+    // Advance the remaining time to see if the original search would have been called
+    act(() => {
+      jest.advanceTimersByTime(100);
+    });
+
+    await waitFor(() => {
+      // Should only have been called once with empty string (from clear), not with 'rick'
+      expect(mockOnSearch).toHaveBeenCalledTimes(1);
+      expect(mockOnSearch).toHaveBeenCalledWith('');
+      expect(mockOnSearch).not.toHaveBeenCalledWith('rick');
+    });
+  });
+
+  it('should work correctly after clearing and typing again', async () => {
+    renderWithProviders(<SearchInput onSearch={mockOnSearch} />);
+
+    const input = screen.getByPlaceholderText('Search for a character');
+
+    act(() => {
+      jest.runAllTimers();
+    });
+    mockOnSearch.mockClear();
+
+    // Type something
+    act(() => {
+      fireEvent.change(input, { target: { value: 'rick' } });
+    });
+
+    // Clear it
+    const clearButton = screen.getByTestId('SearchInput_clearButton');
+    act(() => {
+      fireEvent.click(clearButton);
+    });
+
+    // Type something new
+    act(() => {
+      fireEvent.change(input, { target: { value: 'morty' } });
+    });
+
+    // Advance time for debounce
+    act(() => {
+      jest.advanceTimersByTime(300);
+    });
+
+    await waitFor(() => {
+      expect(mockOnSearch).toHaveBeenCalledWith('');
+      expect(mockOnSearch).toHaveBeenCalledWith('morty');
+      expect(mockOnSearch).toHaveBeenCalledTimes(2);
+    });
+  });
 });
