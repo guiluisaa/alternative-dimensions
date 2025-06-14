@@ -1,19 +1,26 @@
 'use client';
 
-import { useGetCharactersQuery } from '@/generated/graphql';
+import { ApolloError } from '@apollo/client';
+
+import { TableHeaderCell } from '@ui/TableHeaderCell';
+
+import { GetCharactersQuery } from '@/generated/graphql';
+
+import { CharacterRow } from '../CharacterRow';
 
 type CharactersTableProps = {
-  search: string;
+  data?: GetCharactersQuery;
+  error?: ApolloError;
+  loading?: boolean;
 };
 
-export function CharactersTable({ search }: CharactersTableProps) {
-  // TODO: add thantstack query to graphql code generator
-  const { data, loading, error } = useGetCharactersQuery({
-    variables: { filter: { name: search } }
-  });
-
+export function CharactersTable({
+  data,
+  error,
+  loading
+}: CharactersTableProps) {
   // TODO: add loading state
-  if (loading && !data) return <div>Loading...</div>;
+  if (loading) return <div>Loading...</div>;
 
   // TODO: add error state
   if (error) return <div>Error: {error.message}</div>;
@@ -21,14 +28,22 @@ export function CharactersTable({ search }: CharactersTableProps) {
   if (data?.characters?.results?.length === 0)
     return <div>No characters found</div>;
 
+  if (!data) return null;
+
   return (
-    <div>
-      {data?.characters?.results?.map(character => (
-        // TODO: add character table component
-        <div key={character?.id}>
-          <h3>{character?.name}</h3>
-        </div>
-      ))}
-    </div>
+    <table>
+      <thead>
+        <tr>
+          <TableHeaderCell>Avatar</TableHeaderCell>
+          <TableHeaderCell>Name</TableHeaderCell>
+          <TableHeaderCell>Location</TableHeaderCell>
+        </tr>
+      </thead>
+      <tbody>
+        {data?.characters?.results?.map(character => (
+          <CharacterRow key={character?.id} character={character} />
+        ))}
+      </tbody>
+    </table>
   );
 }

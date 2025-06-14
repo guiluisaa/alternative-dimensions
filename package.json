@@ -32,7 +32,8 @@
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.54.2",
     "scripty": "^2.1.1",
-    "sonner": "^2.0.1"
+    "sonner": "^2.0.1",
+    "styled-components": "^6.1.19"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.7",

@@ -1,10 +1,10 @@
 import {
-  render,
+  renderWithProviders,
   screen,
   fireEvent,
   waitFor,
   act
-} from '@testing-library/react';
+} from '@/__tests__/renderWithProviders';
 
 import { SearchInput } from './index';
 
@@ -27,7 +27,7 @@ describe('SearchInput', () => {
   });
 
   it('should render the search input with correct placeholder', () => {
-    render(<SearchInput onSearch={mockOnSearch} />);
+    renderWithProviders(<SearchInput onSearch={mockOnSearch} />);
 
     const input = screen.getByPlaceholderText('Search for a character');
     expect(input).toBeInTheDocument();
@@ -35,7 +35,7 @@ describe('SearchInput', () => {
   });
 
   it('should call onSearch with empty string on initial render', async () => {
-    render(<SearchInput onSearch={mockOnSearch} />);
+    renderWithProviders(<SearchInput onSearch={mockOnSearch} />);
 
     act(() => {
       jest.runAllTimers();
@@ -47,7 +47,7 @@ describe('SearchInput', () => {
   });
 
   it('should update input value when user types', () => {
-    render(<SearchInput onSearch={mockOnSearch} />);
+    renderWithProviders(<SearchInput onSearch={mockOnSearch} />);
 
     const input = screen.getByPlaceholderText('Search for a character');
     fireEvent.change(input, { target: { value: 'rick' } });
@@ -56,7 +56,7 @@ describe('SearchInput', () => {
   });
 
   it('should debounce search calls with default delay (300ms)', async () => {
-    render(<SearchInput onSearch={mockOnSearch} />);
+    renderWithProviders(<SearchInput onSearch={mockOnSearch} />);
 
     const input = screen.getByPlaceholderText('Search for a character');
 
@@ -81,7 +81,7 @@ describe('SearchInput', () => {
   });
 
   it('should debounce multiple rapid changes', async () => {
-    render(<SearchInput onSearch={mockOnSearch} />);
+    renderWithProviders(<SearchInput onSearch={mockOnSearch} />);
 
     const input = screen.getByPlaceholderText('Search for a character');
 
@@ -107,7 +107,9 @@ describe('SearchInput', () => {
 
   it('should use custom delay when provided', async () => {
     const customDelay = 500;
-    render(<SearchInput onSearch={mockOnSearch} delay={customDelay} />);
+    renderWithProviders(
+      <SearchInput onSearch={mockOnSearch} delay={customDelay} />
+    );
 
     const input = screen.getByPlaceholderText('Search for a character');
 
@@ -130,7 +132,7 @@ describe('SearchInput', () => {
   });
 
   it('should cancel previous timer when new input is provided', async () => {
-    render(<SearchInput onSearch={mockOnSearch} />);
+    renderWithProviders(<SearchInput onSearch={mockOnSearch} />);
 
     const input = screen.getByPlaceholderText('Search for a character');
 
@@ -163,7 +165,7 @@ describe('SearchInput', () => {
   });
 
   it('should handle empty search input', async () => {
-    render(<SearchInput onSearch={mockOnSearch} />);
+    renderWithProviders(<SearchInput onSearch={mockOnSearch} />);
 
     const input = screen.getByPlaceholderText('Search for a character');
 
