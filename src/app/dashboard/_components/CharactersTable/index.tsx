@@ -2,7 +2,7 @@
 
 import { ApolloError } from '@apollo/client';
 
-import { Button } from '@ui/Button';
+import { useInfiniteScroll } from '@lib/hooks/useInfiniteScroll';
 import { Spinner } from '@ui/Spinner';
 import { TableHeaderCell } from '@ui/TableHeaderCell';
 
@@ -27,6 +27,14 @@ export function CharactersTable({
   isLoadingMore,
   onLoadMore
 }: CharactersTableProps) {
+  const hasNextPage = !!data?.characters?.info?.next;
+
+  const { lastElementRef } = useInfiniteScroll(
+    onLoadMore || (() => {}),
+    !!isLoadingMore,
+    hasNextPage
+  );
+
   // TODO: add loading state
   if (loading) return <div>Loading...</div>;
 
@@ -49,19 +57,26 @@ export function CharactersTable({
           </tr>
         </thead>
         <tbody>
-          {data?.characters?.results?.map(character => (
-            <CharacterRow key={character?.id} character={character} />
+          {data?.characters?.results?.map((character, index) => (
+            <CharacterRow
+              key={character?.id}
+              character={character}
+              ref={
+                index === (data?.characters?.results?.length ?? 0) - 1
+                  ? lastElementRef
+                  : undefined
+              }
+            />
           ))}
         </tbody>
       </table>
 
-      {isLoadingMore && <Spinner />}
-
-      {!!data?.characters?.info?.next && (
-        // TODO: add infinite scroll
-        <Button onClick={onLoadMore} disabled={isLoadingMore}>
-          Load more
-        </Button>
+      {isLoadingMore && (
+        <div
+          style={{ display: 'flex', justifyContent: 'center', padding: '20px' }}
+        >
+          <Spinner />
+        </div>
       )}
     </S.Wrapper>
   );
