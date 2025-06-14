@@ -1,29 +1,34 @@
 'use client';
 
+import { ApolloError } from '@apollo/client';
+
 import { TableHeaderCell } from '@ui/TableHeaderCell';
 
-import { useGetCharactersQuery } from '@/generated/graphql';
+import { GetCharactersQuery } from '@/generated/graphql';
 
 import { CharacterRow } from '../CharacterRow';
 
 type CharactersTableProps = {
-  search: string;
+  data?: GetCharactersQuery;
+  error?: ApolloError;
+  loading?: boolean;
 };
 
-export function CharactersTable({ search }: CharactersTableProps) {
-  // TODO: add thantstack query to graphql code generator
-  const { data, loading, error } = useGetCharactersQuery({
-    variables: { filter: { name: search } }
-  });
-
+export function CharactersTable({
+  data,
+  error,
+  loading
+}: CharactersTableProps) {
   // TODO: add loading state
-  if (loading && !data) return <div>Loading...</div>;
+  if (loading) return <div>Loading...</div>;
 
   // TODO: add error state
   if (error) return <div>Error: {error.message}</div>;
 
   if (data?.characters?.results?.length === 0)
     return <div>No characters found</div>;
+
+  if (!data) return null;
 
   return (
     <table>

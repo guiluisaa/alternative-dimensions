@@ -9,7 +9,7 @@ const spin = keyframes`
   }
 `;
 
-const DEFAULT_SIZE = 24;
+const DEFAULT_SIZE = 20;
 
 type WrapperProps = {
   size?: number;

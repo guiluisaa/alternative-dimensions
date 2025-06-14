@@ -1,11 +1,18 @@
 import { useEffect, useState } from 'react';
 
+import * as S from './styles';
+
 interface SearchInputProps {
   onSearch: (search: string) => void;
   delay?: number;
+  loading?: boolean;
 }
 
-export function SearchInput({ onSearch, delay = 300 }: SearchInputProps) {
+export function SearchInput({
+  onSearch,
+  delay = 300,
+  loading = false
+}: SearchInputProps) {
   const [search, setSearch] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState(search);
 
@@ -25,20 +32,24 @@ export function SearchInput({ onSearch, delay = 300 }: SearchInputProps) {
     setSearch(e.target.value);
   };
 
+  const canClear = search.length > 0 && !loading;
+
+  const handleClear = () => {
+    setSearch('');
+    setDebouncedSearch('');
+  };
+
   // TODO: add clear button
   return (
-    <input
-      // TODO: move to a styled component
-      style={{
-        padding: '10px',
-        borderRadius: '5px',
-        border: '1px solid #ccc',
-        width: '300px'
-      }}
-      type="text"
-      placeholder="Search for a character"
-      value={search}
-      onChange={handleChange}
-    />
+    <S.Wrapper>
+      <S.Input
+        type="text"
+        placeholder="Search for a character"
+        value={search}
+        onChange={handleChange}
+      />
+      {canClear && <S.CloseButton onClick={handleClear} name="close" />}
+      {loading && <S.Spinner />}
+    </S.Wrapper>
   );
 }
