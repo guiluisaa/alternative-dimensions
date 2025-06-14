@@ -37,6 +37,7 @@ export function SearchInput({
   const handleClear = () => {
     setSearch('');
     setDebouncedSearch('');
+    onSearch('');
   };
 
   // TODO: add clear button
@@ -48,7 +49,13 @@ export function SearchInput({
         value={search}
         onChange={handleChange}
       />
-      {canClear && <S.CloseButton onClick={handleClear} name="close" />}
+      {canClear && (
+        <S.CloseButton
+          data-testid="SearchInput_clearButton"
+          onClick={handleClear}
+          name="close"
+        />
+      )}
       {loading && <S.Spinner />}
     </S.Wrapper>
   );

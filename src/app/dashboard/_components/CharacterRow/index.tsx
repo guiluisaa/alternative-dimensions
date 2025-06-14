@@ -18,14 +18,12 @@ type CharacterRowProps = DetailedHTMLProps<
 };
 
 export function CharacterRow({ character, ...props }: CharacterRowProps) {
+  const imageSrc = character?.image || '/placeholder-avatar.png';
+
   return (
     <tr {...props}>
       <TableCell>
-        <S.Avatar
-          src={character?.image ?? ''}
-          alt={character?.name ?? ''}
-          loading="lazy"
-        />
+        <S.Avatar src={imageSrc} alt={character?.name ?? ''} loading="lazy" />
       </TableCell>
       <S.NameCell>{character?.name}</S.NameCell>
       <TableCell>{character?.location?.name}</TableCell>
