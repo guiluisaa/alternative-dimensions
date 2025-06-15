@@ -48,7 +48,7 @@ export function CharactersTable({
 
   return (
     <S.Wrapper>
-      <table>
+      <S.Table>
         <thead>
           <tr>
             <TableHeaderCell>Avatar</TableHeaderCell>
@@ -69,7 +69,7 @@ export function CharactersTable({
             />
           ))}
         </tbody>
-      </table>
+      </S.Table>
 
       {isLoadingMore && (
         <div

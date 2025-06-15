@@ -4,32 +4,23 @@ import { useInfiniteCharactersQuery } from '../../hooks/useInfiniteCharactersQue
 
 import { CharactersTable } from './components/CharactersTable';
 import { SearchInput } from './components/SearchInput';
+import * as S from './styles';
 
 export function CharactersSection() {
   const { data, loading, error, handleLoadMore, isLoadingMore, setSearch } =
     useInfiniteCharactersQuery();
 
   return (
-    <div>
-      <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Characters</h2>
-      <div
-        // TODO: move to a styled component
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          marginBottom: '20px'
-        }}
-      >
-        <SearchInput onSearch={setSearch} loading={loading} />
-      </div>
+    <S.Wrapper>
+      <S.TitleWrapper>
+        <S.Title>Characters</S.Title>
+      </S.TitleWrapper>
 
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          margin: '0 auto'
-        }}
-      >
+      <S.SearchWrapper>
+        <SearchInput onSearch={setSearch} loading={loading} />
+      </S.SearchWrapper>
+
+      <S.CharactersTableWrapper>
         <CharactersTable
           data={data}
           error={error}
@@ -37,7 +28,7 @@ export function CharactersSection() {
           isLoadingMore={isLoadingMore}
           onLoadMore={handleLoadMore}
         />
-      </div>
-    </div>
+      </S.CharactersTableWrapper>
+    </S.Wrapper>
   );
 }

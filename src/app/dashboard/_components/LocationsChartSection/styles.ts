@@ -7,11 +7,6 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   width: 100%;
 
-  background-color: ${({ theme }) => theme.color.neutral.white};
-  padding: 24px;
-  border-radius: 10px;
-  border: 1px solid ${({ theme }) => theme.color.neutral.lightGray};
-
   @media (min-width: 1024px) {
     position: sticky;
     top: 0;
