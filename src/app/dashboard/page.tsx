@@ -1,10 +1,11 @@
 import { CharactersSection } from './_components/CharactersSection';
+import { LocationsChartSection } from './_components/LocationsChartSection';
 
 export default async function Page() {
   return (
-    <main>
-      <h1>Dashboard</h1>
+    <>
+      <LocationsChartSection />
       <CharactersSection />
-    </main>
+    </>
   );
 }

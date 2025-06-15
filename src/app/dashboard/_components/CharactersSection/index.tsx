@@ -1,8 +1,9 @@
 'use client';
 
 import { useInfiniteCharactersQuery } from '../../hooks/useInfiniteCharactersQuery';
-import { CharactersTable } from '../CharactersTable';
-import { SearchInput } from '../SearchInput';
+
+import { CharactersTable } from './components/CharactersTable';
+import { SearchInput } from './components/SearchInput';
 
 export function CharactersSection() {
   const { data, loading, error, handleLoadMore, isLoadingMore, setSearch } =
