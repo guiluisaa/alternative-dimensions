@@ -22,6 +22,7 @@ export default async function RootLayout({
       <body className={nunitoSans.className}>
         <Providers>
           <Header />
+
           {children}
         </Providers>
       </body>
