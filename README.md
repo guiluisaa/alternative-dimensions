@@ -139,6 +139,8 @@ src/
 4. **Internationalization**: No i18n support for multi-language functionality
 5. **Documentation**: Component documentation (Storybook) not implemented
 6. **E2E Testing**: Only unit tests present, missing Cypress/Playwright integration
+7. **Migration from styled-components to CSS Modules**: Server-side rendering (SSR) friendly, no runtime overhead, better performance, native CSS with scoped class names, TypeScript support via CSS Modules declaration files
+8. **Character details page**: page with all character info details
 
 **🎯 Quick Wins Available:**
 
