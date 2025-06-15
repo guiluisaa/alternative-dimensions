@@ -1,22 +1,16 @@
 'use client';
 
-import { useState } from 'react';
-
-import { useGetCharactersQuery } from '@/generated/graphql';
-
+import { useInfiniteCharactersQuery } from '../../hooks/useInfiniteCharactersQuery';
 import { CharactersTable } from '../CharactersTable';
 import { SearchInput } from '../SearchInput';
 
 export function CharactersSection() {
-  const [search, setSearch] = useState('');
-
-  // TODO: add thantstack query to graphql code generator
-  const { data, loading, error } = useGetCharactersQuery({
-    variables: { filter: { name: search } }
-  });
+  const { data, loading, error, handleLoadMore, isLoadingMore, setSearch } =
+    useInfiniteCharactersQuery();
 
   return (
     <div>
+      <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Characters</h2>
       <div
         // TODO: move to a styled component
         style={{
@@ -28,10 +22,20 @@ export function CharactersSection() {
         <SearchInput onSearch={setSearch} loading={loading} />
       </div>
 
-      <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Characters</h2>
-
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <CharactersTable data={data} error={error} loading={loading} />
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          margin: '0 auto'
+        }}
+      >
+        <CharactersTable
+          data={data}
+          error={error}
+          loading={loading}
+          isLoadingMore={isLoadingMore}
+          onLoadMore={handleLoadMore}
+        />
       </div>
     </div>
   );
