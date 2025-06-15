@@ -1,8 +1,15 @@
-import Image from 'next/image';
+'use client';
 
-export default async function Page() {
+import Image from 'next/image';
+import Link from 'next/link';
+
+import { Button } from '@ui/Button';
+
+import * as S from './styles';
+
+export default function Page() {
   return (
-    <main>
+    <S.Wrapper>
       <Image
         alt="Alternative Dimensions Logo"
         src="/rick-and-morty-logo.png"
@@ -10,8 +17,15 @@ export default async function Page() {
         height={250}
         priority
       />
-      <h1>Welcome to Alternative Dimensions</h1>
-      <p>Keep track of your favorite Rick and Morty characters</p>
-    </main>
+
+      <S.TextWrapper>
+        <h1>Welcome to Alternative Dimensions</h1>
+        <p>Keep track of your favorite Rick and Morty characters</p>
+      </S.TextWrapper>
+
+      <Link href="/dashboard">
+        <Button variant="primary">Dashboard</Button>
+      </Link>
+    </S.Wrapper>
   );
 }

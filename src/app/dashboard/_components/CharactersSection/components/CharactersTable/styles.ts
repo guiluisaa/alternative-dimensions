@@ -5,7 +5,10 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;
   gap: 20px;
   padding-bottom: 2rem;
+`;
+
+export const Table = styled.table`
+  width: 100%;
 `;

@@ -1,14 +1,16 @@
+'use client';
+
 import { BrandLogo } from '@components/BrandLogo';
 import { HeaderNav } from '@components/HeaderNav';
 
-export async function Header() {
+import * as S from './styles';
+
+export function Header() {
   return (
-    <header>
+    <S.Wrapper>
       <BrandLogo />
 
-      <div>
-        <HeaderNav />
-      </div>
-    </header>
+      <HeaderNav />
+    </S.Wrapper>
   );
 }

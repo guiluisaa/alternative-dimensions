@@ -5,13 +5,25 @@ export const Wrapper = styled.main`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  padding: 0px 24px;
+
+  & > * {
+    width: 100%;
+  }
+`;
+
+export const TitleWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
 `;
 
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
 
-  margin-top: 48px;
+  padding-top: 48px;
 
   @media (min-width: 1024px) {
     flex-direction: row;
