@@ -11,6 +11,7 @@ import { GetCharactersQuery } from '@/generated/graphql';
 import { CharacterRow } from '../CharacterRow';
 
 import * as S from './styles';
+import { Alert } from '@ui/Alert';
 
 type CharactersTableProps = {
   data?: GetCharactersQuery;
@@ -35,11 +36,9 @@ export function CharactersTable({
     hasNextPage
   );
 
-  // TODO: add loading state
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Spinner />;
 
-  // TODO: add error state
-  if (error) return <div>Error: {error.message}</div>;
+  if (error) return <Alert title="Error" description={error.message} />;
 
   if (data?.characters?.results?.length === 0)
     return <div>No characters found</div>;
