@@ -3,6 +3,7 @@
 import { ApolloError } from '@apollo/client';
 
 import { useInfiniteScroll } from '@lib/hooks/useInfiniteScroll';
+import { Alert } from '@ui/Alert';
 import { Spinner } from '@ui/Spinner';
 import { TableHeaderCell } from '@ui/TableHeaderCell';
 
@@ -11,7 +12,6 @@ import { GetCharactersQuery } from '@/generated/graphql';
 import { CharacterRow } from '../CharacterRow';
 
 import * as S from './styles';
-import { Alert } from '@ui/Alert';
 
 type CharactersTableProps = {
   data?: GetCharactersQuery;
