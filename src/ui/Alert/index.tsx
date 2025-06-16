@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import * as S from './styles';
+import * as styles from './styles.css';
 
 type AlertProps = {
   title?: string;
@@ -9,9 +9,9 @@ type AlertProps = {
 
 export function Alert({ title, description }: AlertProps) {
   return (
-    <S.Wrapper>
-      <S.Title>{title}</S.Title>
-      {description && <S.Description>{description}</S.Description>}
-    </S.Wrapper>
+    <div className={styles.wrapper}>
+      {title && <h4 className={styles.title}>{title}</h4>}
+      {description && <p className={styles.description}>{description}</p>}
+    </div>
   );
 }

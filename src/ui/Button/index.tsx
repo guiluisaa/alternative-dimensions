@@ -1,21 +1,35 @@
 'use client';
 
-import { ButtonHTMLAttributes, ComponentProps } from 'react';
+import { ButtonHTMLAttributes } from 'react';
 
-import * as S from './styles';
+import { clsx } from 'clsx';
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
-  ComponentProps<typeof S.Wrapper>;
+import * as styles from './styles.css';
+
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  variant?: 'primary' | 'secondary';
+  size?: 'sm' | 'md';
+  children: React.ReactNode;
+};
 
 export function Button({
   children,
   variant = 'primary',
   size = 'md',
+  className,
   ...props
 }: ButtonProps) {
   return (
-    <S.Wrapper variant={variant} size={size} {...props}>
+    <button
+      className={clsx(
+        styles.button,
+        styles.variants[variant],
+        styles.sizes[size],
+        className
+      )}
+      {...props}
+    >
       {children}
-    </S.Wrapper>
+    </button>
   );
 }

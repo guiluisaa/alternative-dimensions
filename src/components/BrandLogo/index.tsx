@@ -1,18 +1,22 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
-import * as S from './styles';
+import * as styles from './styles.css';
 
 export function BrandLogo() {
   return (
     <Link href={'/'}>
-      <S.Wrapper>
-        <S.Logo
+      <div className={styles.wrapper}>
+        <Image
           alt="Alternative dimensions Logo"
           src="/rick-and-morty-logo.png"
+          width={40}
+          height={40}
+          priority
         />
 
-        <S.Title>Alternative Dimensions</S.Title>
-      </S.Wrapper>
+        <h1 className={styles.title}>Alternative Dimensions</h1>
+      </div>
     </Link>
   );
 }

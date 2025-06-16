@@ -11,7 +11,7 @@ import { GetCharactersQuery } from '@/generated/graphql';
 
 import { CharacterRow } from '../CharacterRow';
 
-import * as S from './styles';
+import * as styles from './styles.css';
 
 type CharactersTableProps = {
   data?: GetCharactersQuery;
@@ -38,9 +38,9 @@ export function CharactersTable({
 
   if (loading)
     return (
-      <S.SpinnerWrapper>
+      <div className={styles.spinnerWrapper}>
         <Spinner data-testid="spinner" />
-      </S.SpinnerWrapper>
+      </div>
     );
 
   if (error) return <Alert title="Error" description={error.message} />;
@@ -51,8 +51,8 @@ export function CharactersTable({
   if (!data) return null;
 
   return (
-    <S.Wrapper>
-      <S.Table>
+    <div className={styles.wrapper}>
+      <table className={styles.table}>
         <thead>
           <tr>
             <TableHeaderCell>Avatar</TableHeaderCell>
@@ -73,13 +73,13 @@ export function CharactersTable({
             />
           ))}
         </tbody>
-      </S.Table>
+      </table>
 
       {isLoadingMore && (
-        <S.SpinnerWrapper>
+        <div className={styles.spinnerWrapper}>
           <Spinner data-testid="loading-more-spinner" />
-        </S.SpinnerWrapper>
+        </div>
       )}
-    </S.Wrapper>
+    </div>
   );
 }

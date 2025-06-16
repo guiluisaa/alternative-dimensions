@@ -2,56 +2,38 @@ import { ReactElement } from 'react';
 
 import { MockedProvider, MockedResponse } from '@apollo/client/testing';
 import { render, RenderOptions } from '@testing-library/react';
-import { ThemeProvider } from 'styled-components';
 
-import { theme } from '@/lib/theme';
-import GlobalStyle from '@/lib/theme/GlobalStyle';
+import { themeClass } from '@/lib/theme';
 
 interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
   apolloMocks?: MockedResponse[];
-  customTheme?: typeof theme;
 }
 
 interface AllProvidersProps {
   children?: React.ReactNode;
   apolloMocks?: MockedResponse[];
-  customTheme?: typeof theme;
 }
 
-function AllProviders({
-  children,
-  apolloMocks = [],
-  customTheme = theme
-}: AllProvidersProps) {
+function AllProviders({ children, apolloMocks = [] }: AllProvidersProps) {
   if (apolloMocks.length > 0) {
     return (
       <MockedProvider mocks={apolloMocks} addTypename={false}>
-        <ThemeProvider theme={customTheme}>
-          <GlobalStyle />
-          {children}
-        </ThemeProvider>
+        <div className={themeClass}>{children}</div>
       </MockedProvider>
     );
   }
 
-  return (
-    <ThemeProvider theme={customTheme}>
-      <GlobalStyle />
-      {children}
-    </ThemeProvider>
-  );
+  return <div className={themeClass}>{children}</div>;
 }
 
 export function renderWithProviders(
   ui: ReactElement,
   options: CustomRenderOptions = {}
 ) {
-  const { apolloMocks, customTheme, ...renderOptions } = options;
+  const { apolloMocks, ...renderOptions } = options;
 
   const Wrapper = ({ children }: { children?: React.ReactNode }) => (
-    <AllProviders apolloMocks={apolloMocks} customTheme={customTheme}>
-      {children}
-    </AllProviders>
+    <AllProviders apolloMocks={apolloMocks}>{children}</AllProviders>
   );
 
   return render(ui, { wrapper: Wrapper, ...renderOptions });

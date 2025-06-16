@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 
-import * as S from './styles';
+import { IconButton } from '@ui/IconButton';
+import { Input } from '@ui/Input';
+import { Spinner } from '@ui/Spinner';
+
+import * as styles from './styles.css';
 
 interface SearchInputProps {
   onSearch: (search: string) => void;
@@ -41,21 +45,23 @@ export function SearchInput({
   };
 
   return (
-    <S.Wrapper>
-      <S.Input
+    <div className={styles.wrapper}>
+      <Input
+        className={styles.input}
         type="text"
         placeholder="Search for a character"
         value={search}
         onChange={handleChange}
       />
       {canClear && (
-        <S.CloseButton
+        <IconButton
+          className={styles.closeButton}
           data-testid="SearchInput_clearButton"
           onClick={handleClear}
           name="close"
         />
       )}
-      {loading && <S.Spinner />}
-    </S.Wrapper>
+      {loading && <Spinner className={styles.spinner} size="md" />}
+    </div>
   );
 }
