@@ -3,14 +3,14 @@
 import { BrandLogo } from '@components/BrandLogo';
 import { HeaderNav } from '@components/HeaderNav';
 
-import * as S from './styles';
+import * as styles from './styles.css';
 
 export function Header() {
   return (
-    <S.Wrapper>
+    <header className={styles.wrapper}>
       <BrandLogo />
 
       <HeaderNav />
-    </S.Wrapper>
+    </header>
   );
 }

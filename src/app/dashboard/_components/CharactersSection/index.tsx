@@ -4,23 +4,23 @@ import { useInfiniteCharactersQuery } from '../../hooks/useInfiniteCharactersQue
 
 import { CharactersTable } from './components/CharactersTable';
 import { SearchInput } from './components/SearchInput';
-import * as S from './styles';
+import * as styles from './styles.css';
 
 export function CharactersSection() {
   const { data, loading, error, handleLoadMore, isLoadingMore, setSearch } =
     useInfiniteCharactersQuery();
 
   return (
-    <S.Wrapper>
-      <S.TitleWrapper>
-        <S.Title>Characters</S.Title>
-      </S.TitleWrapper>
+    <div className={styles.wrapper}>
+      <div className={styles.titleWrapper}>
+        <h2 className={styles.title}>Characters</h2>
+      </div>
 
-      <S.SearchWrapper>
+      <div className={styles.searchWrapper}>
         <SearchInput onSearch={setSearch} loading={loading} />
-      </S.SearchWrapper>
+      </div>
 
-      <S.CharactersTableWrapper>
+      <div className={styles.charactersTableWrapper}>
         <CharactersTable
           data={data}
           error={error}
@@ -28,7 +28,7 @@ export function CharactersSection() {
           isLoadingMore={isLoadingMore}
           onLoadMore={handleLoadMore}
         />
-      </S.CharactersTableWrapper>
-    </S.Wrapper>
+      </div>
+    </div>
   );
 }

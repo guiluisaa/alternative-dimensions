@@ -4,7 +4,7 @@ import { HTMLAttributes } from 'react';
 
 import { ChartLegendItem } from '../ChartLegendItem';
 
-import * as S from './styles';
+import * as styles from './styles.css';
 
 type ChartLegendsProps = HTMLAttributes<HTMLDivElement> & {
   chartData: { name: string; value: number }[];
@@ -12,16 +12,16 @@ type ChartLegendsProps = HTMLAttributes<HTMLDivElement> & {
 
 export function ChartLegends({ chartData, ...props }: ChartLegendsProps) {
   return (
-    <S.Wrapper {...props}>
+    <div className={styles.wrapper} {...props}>
       <h3>Legend</h3>
 
-      <S.List>
+      <div className={styles.list}>
         {chartData.map((entry, index) => (
-          <S.ListItem key={entry.name}>
+          <div className={styles.listItem} key={entry.name}>
             <ChartLegendItem index={index} {...entry} />
-          </S.ListItem>
+          </div>
         ))}
-      </S.List>
-    </S.Wrapper>
+      </div>
+    </div>
   );
 }

@@ -1,16 +1,34 @@
-import { ComponentProps } from 'react';
+import { ButtonHTMLAttributes } from 'react';
+
+import { clsx } from 'clsx';
 
 import { Icon } from '@ui/Icon';
 
-import * as S from './styles';
+import * as styles from './styles.css';
 
-type IconButtonProps = ComponentProps<typeof S.Wrapper> &
-  ComponentProps<typeof Icon>;
+type IconButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  name: 'close';
+  size?: 'sm' | 'md' | 'lg';
+};
 
-export function IconButton({ size = 20, name, ...props }: IconButtonProps) {
+const sizeMap = {
+  sm: 16,
+  md: 20,
+  lg: 24
+};
+
+export function IconButton({
+  size = 'md',
+  name,
+  className,
+  ...props
+}: IconButtonProps) {
   return (
-    <S.Wrapper size={size} {...props}>
-      <Icon size={size} name={name} />
-    </S.Wrapper>
+    <button
+      className={clsx(styles.button, styles.sizes[size], className)}
+      {...props}
+    >
+      <Icon size={sizeMap[size]} name={name} />
+    </button>
   );
 }

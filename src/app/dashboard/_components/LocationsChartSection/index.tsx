@@ -8,7 +8,7 @@ import { Spinner } from '@ui/Spinner';
 
 import { ChartLegends } from './components/ChartLegends';
 import { LocationsChart } from './components/LocationsChart';
-import * as S from './styles';
+import * as styles from './styles.css';
 
 export const COLORS = [
   '#0088FE',
@@ -63,34 +63,34 @@ export function LocationsChartSection({
 
   if (loading)
     return (
-      <S.Wrapper {...props}>
+      <div className={styles.wrapper} {...props}>
         <h2>Characters by Location</h2>
 
-        <S.ChartWrapper>
+        <div className={styles.chartWrapper}>
           <Spinner />
-        </S.ChartWrapper>
-      </S.Wrapper>
+        </div>
+      </div>
     );
 
   if (error)
     return (
-      <S.Wrapper {...props}>
+      <div className={styles.wrapper} {...props}>
         <h2>Characters by Location</h2>
-        <S.ChartWrapper>
+        <div className={styles.chartWrapper}>
           <Alert title="Error" description={error.message} />
-        </S.ChartWrapper>
-      </S.Wrapper>
+        </div>
+      </div>
     );
 
   return (
-    <S.Wrapper {...props}>
+    <div className={styles.wrapper} {...props}>
       <h2>Characters by Location</h2>
 
-      <S.ChartWrapper>
+      <div className={styles.chartWrapper}>
         <LocationsChart chartData={chartData} />
 
         <ChartLegends chartData={chartData} />
-      </S.ChartWrapper>
-    </S.Wrapper>
+      </div>
+    </div>
   );
 }

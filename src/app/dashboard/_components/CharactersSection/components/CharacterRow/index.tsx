@@ -1,10 +1,12 @@
 import { DetailedHTMLProps, HTMLAttributes, forwardRef } from 'react';
 
+import Image from 'next/image';
+
 import { TableCell } from '@ui/TableCell';
 
 import { GetCharactersQuery } from '@/generated/graphql';
 
-import * as S from './styles';
+import * as styles from './styles.css';
 
 type CharacterFromQuery = NonNullable<
   NonNullable<NonNullable<GetCharactersQuery['characters']>['results']>[number]
@@ -24,9 +26,16 @@ export const CharacterRow = forwardRef<HTMLTableRowElement, CharacterRowProps>(
     return (
       <tr {...props} ref={ref}>
         <TableCell>
-          <S.Avatar src={imageSrc} alt={character?.name ?? ''} loading="lazy" />
+          <Image
+            className={styles.avatar}
+            src={imageSrc}
+            alt={character?.name ?? ''}
+            width={50}
+            height={50}
+            loading="lazy"
+          />
         </TableCell>
-        <S.NameCell>{character?.name}</S.NameCell>
+        <TableCell className={styles.nameCell}>{character?.name}</TableCell>
         <TableCell>{character?.location?.name}</TableCell>
       </tr>
     );
