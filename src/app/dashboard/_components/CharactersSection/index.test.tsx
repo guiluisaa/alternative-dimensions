@@ -1,3 +1,6 @@
+import { MockedResponse } from '@apollo/client/testing';
+import { GraphQLError } from 'graphql';
+
 import {
   renderWithProviders,
   screen,
@@ -6,9 +9,6 @@ import {
   act,
   within
 } from '@/__tests__/renderWithProviders';
-import { MockedResponse } from '@apollo/client/testing';
-import { GraphQLError } from 'graphql';
-
 import { GetCharactersDocument, GetCharactersQuery } from '@/generated/graphql';
 
 import { CharactersSection } from './index';
