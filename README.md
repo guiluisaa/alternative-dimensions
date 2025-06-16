@@ -115,19 +115,11 @@ src/
 
 ### Key Trade-offs Made
 
-**✅ What's Working Well:**
-
-- **styled-components**: Provides component-scoped styling and dynamic theming capabilities
-- **Custom Script Management**: Scripty organizes build/dev scripts clearly but adds learning curve
-- **GraphQL Code Generation**: Auto-generated types ensure type safety but adds build complexity
-- **Modular Architecture**: Clean separation of UI vs. feature components aids maintainability
-
 **⚖️ Trade-offs Considered:**
 
-- **Styling Approach**: Chose styled-components over Tailwind for component encapsulation, trading utility-first speed for stronger component boundaries
-- **Testing Setup**: Comprehensive Jest config provides reliability but increases initial setup time
-- **Build Tooling**: Custom shell scripts offer flexibility but may be unfamiliar to some developers
-- **Dependencies**: Heavy dev tooling improves code quality but increases bundle and setup complexity
+- **Styling Approach**: Some component styles are not 100% complete. I ended up choosing to focus on application design and architecture
+- **styled-components**: Some parts of loading experience delays in showing styles due to a limitation of the styled-components library with SSR. I chose it immediately because I use it daily and it would be more productive for the purpose of this test, but in a Next.js production application, I would follow a different approach
+- **Testing**: The main requested tests were written, but coverage is not extensive throughout the rest of the application
 
 ### Unfinished "Extra Mile" Features
 
@@ -148,3 +140,4 @@ src/
 - Implement basic SEO meta tags and Open Graph tags
 - Add loading states and skeleton components for better UX
 - Set up environment-specific configurations
+- Add character details page with more info
