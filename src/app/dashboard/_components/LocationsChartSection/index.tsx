@@ -3,12 +3,12 @@
 import { HTMLAttributes, useMemo } from 'react';
 
 import { useInfiniteCharactersQuery } from '@app/dashboard/hooks/useInfiniteCharactersQuery';
+import { Alert } from '@ui/Alert';
+import { Spinner } from '@ui/Spinner';
 
 import { ChartLegends } from './components/ChartLegends';
 import { LocationsChart } from './components/LocationsChart';
 import * as S from './styles';
-import { Spinner } from '@ui/Spinner';
-import { Alert } from '@ui/Alert';
 
 export const COLORS = [
   '#0088FE',
