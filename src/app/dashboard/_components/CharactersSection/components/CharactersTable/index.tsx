@@ -36,7 +36,7 @@ export function CharactersTable({
     hasNextPage
   );
 
-  if (loading) return <Spinner />;
+  if (loading) return <Spinner data-testid="spinner" />;
 
   if (error) return <Alert title="Error" description={error.message} />;
 
@@ -74,7 +74,7 @@ export function CharactersTable({
         <div
           style={{ display: 'flex', justifyContent: 'center', padding: '20px' }}
         >
-          <Spinner />
+          <Spinner data-testid="loading-more-spinner" />
         </div>
       )}
     </S.Wrapper>
