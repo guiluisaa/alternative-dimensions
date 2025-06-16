@@ -21,4 +21,8 @@ export const ChartWrapper = styled.div`
   justify-content: space-between;
   height: 500px;
   width: 100%;
+
+  & > * {
+    width: 100%;
+  }
 `;

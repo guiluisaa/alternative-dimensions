@@ -40,7 +40,6 @@ export function SearchInput({
     onSearch('');
   };
 
-  // TODO: add clear button
   return (
     <S.Wrapper>
       <S.Input

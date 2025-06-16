@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CharactersSection Integration Tests should match snapshot 1`] = `
+<div>
+  <div
+    class="sc-f8b0f0ff-0 czvQqk"
+  >
+    <div
+      class="sc-f8b0f0ff-1 hwhyzj"
+    >
+      <h2
+        class="sc-f8b0f0ff-2 ccWIIB"
+      >
+        Characters
+      </h2>
+    </div>
+    <div
+      class="sc-f8b0f0ff-3 hLDIXl"
+    >
+      <div
+        class="sc-419c1fde-0 UrOKd"
+      >
+        <input
+          class="sc-5d3b17e7-0 sc-419c1fde-1 XhCTu gLggOR"
+          placeholder="Search for a character"
+          type="text"
+          value=""
+        />
+        <div
+          class="sc-4bf13c95-0 sc-419c1fde-3 bRCyfq csmTTq"
+          size="20"
+        />
+      </div>
+    </div>
+    <div
+      class="sc-f8b0f0ff-4 dxElxo"
+    >
+      <div
+        class="sc-6d5e0d2c-2 izdwHc"
+      >
+        <div
+          class="sc-4bf13c95-0 bRCyfq"
+          data-testid="spinner"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,4 +1,4 @@
-import { DetailedHTMLProps, HTMLAttributes } from 'react';
+import { DetailedHTMLProps, HTMLAttributes, forwardRef } from 'react';
 
 import { TableCell } from '@ui/TableCell';
 
@@ -17,16 +17,20 @@ type CharacterRowProps = DetailedHTMLProps<
   character: CharacterFromQuery | null;
 };
 
-export function CharacterRow({ character, ...props }: CharacterRowProps) {
-  const imageSrc = character?.image || '/placeholder-avatar.png';
+export const CharacterRow = forwardRef<HTMLTableRowElement, CharacterRowProps>(
+  ({ character, ...props }, ref) => {
+    const imageSrc = character?.image || '/placeholder-avatar.png';
 
-  return (
-    <tr {...props}>
-      <TableCell>
-        <S.Avatar src={imageSrc} alt={character?.name ?? ''} loading="lazy" />
-      </TableCell>
-      <S.NameCell>{character?.name}</S.NameCell>
-      <TableCell>{character?.location?.name}</TableCell>
-    </tr>
-  );
-}
+    return (
+      <tr {...props} ref={ref}>
+        <TableCell>
+          <S.Avatar src={imageSrc} alt={character?.name ?? ''} loading="lazy" />
+        </TableCell>
+        <S.NameCell>{character?.name}</S.NameCell>
+        <TableCell>{character?.location?.name}</TableCell>
+      </tr>
+    );
+  }
+);
+
+CharacterRow.displayName = 'CharacterRow';

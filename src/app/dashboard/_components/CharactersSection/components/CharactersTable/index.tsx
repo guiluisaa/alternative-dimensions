@@ -3,6 +3,7 @@
 import { ApolloError } from '@apollo/client';
 
 import { useInfiniteScroll } from '@lib/hooks/useInfiniteScroll';
+import { Alert } from '@ui/Alert';
 import { Spinner } from '@ui/Spinner';
 import { TableHeaderCell } from '@ui/TableHeaderCell';
 
@@ -35,11 +36,14 @@ export function CharactersTable({
     hasNextPage
   );
 
-  // TODO: add loading state
-  if (loading) return <div>Loading...</div>;
+  if (loading)
+    return (
+      <S.SpinnerWrapper>
+        <Spinner data-testid="spinner" />
+      </S.SpinnerWrapper>
+    );
 
-  // TODO: add error state
-  if (error) return <div>Error: {error.message}</div>;
+  if (error) return <Alert title="Error" description={error.message} />;
 
   if (data?.characters?.results?.length === 0)
     return <div>No characters found</div>;
@@ -72,11 +76,9 @@ export function CharactersTable({
       </S.Table>
 
       {isLoadingMore && (
-        <div
-          style={{ display: 'flex', justifyContent: 'center', padding: '20px' }}
-        >
-          <Spinner />
-        </div>
+        <S.SpinnerWrapper>
+          <Spinner data-testid="loading-more-spinner" />
+        </S.SpinnerWrapper>
       )}
     </S.Wrapper>
   );
