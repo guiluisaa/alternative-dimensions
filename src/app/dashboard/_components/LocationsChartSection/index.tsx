@@ -7,6 +7,8 @@ import { useInfiniteCharactersQuery } from '@app/dashboard/hooks/useInfiniteChar
 import { ChartLegends } from './components/ChartLegends';
 import { LocationsChart } from './components/LocationsChart';
 import * as S from './styles';
+import { Spinner } from '@ui/Spinner';
+import { Alert } from '@ui/Alert';
 
 export const COLORS = [
   '#0088FE',
@@ -24,7 +26,7 @@ type LocationsChartSectionProps = HTMLAttributes<HTMLDivElement>;
 export function LocationsChartSection({
   ...props
 }: LocationsChartSectionProps) {
-  const { data } = useInfiniteCharactersQuery();
+  const { data, loading, error } = useInfiniteCharactersQuery();
 
   const chartData = useMemo(() => {
     if (!data?.characters?.results) return [];
@@ -58,6 +60,27 @@ export function LocationsChartSection({
 
     return result.sort((a, b) => b.value - a.value);
   }, [data]);
+
+  if (loading)
+    return (
+      <S.Wrapper {...props}>
+        <h2>Characters by Location</h2>
+
+        <S.ChartWrapper>
+          <Spinner />
+        </S.ChartWrapper>
+      </S.Wrapper>
+    );
+
+  if (error)
+    return (
+      <S.Wrapper {...props}>
+        <h2>Characters by Location</h2>
+        <S.ChartWrapper>
+          <Alert title="Error" description={error.message} />
+        </S.ChartWrapper>
+      </S.Wrapper>
+    );
 
   return (
     <S.Wrapper {...props}>
