@@ -76,11 +76,9 @@ export function CharactersTable({
       </S.Table>
 
       {isLoadingMore && (
-        <div
-          style={{ display: 'flex', justifyContent: 'center', padding: '20px' }}
-        >
+        <S.SpinnerWrapper>
           <Spinner data-testid="loading-more-spinner" />
-        </div>
+        </S.SpinnerWrapper>
       )}
     </S.Wrapper>
   );
