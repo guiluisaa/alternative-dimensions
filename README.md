@@ -1,6 +1,22 @@
 # Alternative Dimensions
 
-A modern Next.js application built with TypeScript, GraphQL, and styled-components, featuring a modular architecture and comprehensive testing setup.
+A small Next.js dashboard that consumes the **Rick & Morty GraphQL API**, with an infinitely scrolling table, live search, and a chart summarizing characters by location.
+
+🟢 **Live Demo:** [https://alternative.ergil.dev](https://alternative.ergil.dev)  
+💻 **Repository:** [https://github.com/guiluisaa/alternative-dimensions](https://github.com/guiluisaa/alternative-dimensions)
+
+---
+
+## 🚀 Features
+
+- 🔍 **Live search** by character name (with debounce)
+- 📜 **Infinite scroll** with cursor-based pagination
+- 📊 **Chart** (pie/donut) showing the number of characters by location
+- ⚛️ **Atomic Design Architecture** (Atoms, Molecules, Organisms, Pages)
+- 🎨 Responsive UI for desktop and tablet
+- 🔗 Data fetching with **Apollo Client**
+- ✅ Loading and error states handling
+- 🧪 Unit and integration tests
 
 ## 🚀 Setup & Run Instructions
 
