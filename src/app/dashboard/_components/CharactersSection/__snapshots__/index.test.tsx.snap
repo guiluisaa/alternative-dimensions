@@ -36,9 +36,13 @@ exports[`CharactersSection Integration Tests should match snapshot 1`] = `
       class="sc-f8b0f0ff-4 dxElxo"
     >
       <div
-        class="sc-4bf13c95-0 bRCyfq"
-        data-testid="spinner"
-      />
+        class="sc-6d5e0d2c-2 izdwHc"
+      >
+        <div
+          class="sc-4bf13c95-0 bRCyfq"
+          data-testid="spinner"
+        />
+      </div>
     </div>
   </div>
 </div>
