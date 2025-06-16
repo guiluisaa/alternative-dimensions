@@ -36,7 +36,12 @@ export function CharactersTable({
     hasNextPage
   );
 
-  if (loading) return <Spinner data-testid="spinner" />;
+  if (loading)
+    return (
+      <S.SpinnerWrapper>
+        <Spinner data-testid="spinner" />
+      </S.SpinnerWrapper>
+    );
 
   if (error) return <Alert title="Error" description={error.message} />;
 
