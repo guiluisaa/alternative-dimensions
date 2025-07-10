@@ -1,17 +1,29 @@
+'use client';
+
 import { ReactNode } from 'react';
 
-import * as S from './styles';
+import { cn } from '@/lib/cn';
 
-type AlertProps = {
-  title?: string;
-  description?: string | ReactNode;
-};
+export interface AlertProps {
+  title?: ReactNode;
+  description?: ReactNode;
+  className?: string;
+}
 
-export function Alert({ title, description }: AlertProps) {
+export function Alert({ title, description, className }: AlertProps) {
   return (
-    <S.Wrapper>
-      <S.Title>{title}</S.Title>
-      {description && <S.Description>{description}</S.Description>}
-    </S.Wrapper>
+    <div
+      className={cn(
+        'flex flex-col gap-2 rounded-lg border border-palette-red p-4',
+        className
+      )}
+    >
+      {title && (
+        <h4 className="text-xl font-bold text-palette-red">{title}</h4>
+      )}
+      {description && (
+        <p className="text-sm text-palette-red">{description}</p>
+      )}
+    </div>
   );
 }

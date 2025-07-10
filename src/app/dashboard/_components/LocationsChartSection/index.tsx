@@ -8,7 +8,8 @@ import { Spinner } from '@ui/Spinner';
 
 import { ChartLegends } from './components/ChartLegends';
 import { LocationsChart } from './components/LocationsChart';
-import * as S from './styles';
+
+import { cn } from '@/lib/cn';
 
 export const COLORS = [
   '#0088FE',
@@ -53,9 +54,9 @@ export function LocationsChartSection({
     const result =
       othersCount > 0
         ? [
-            ...multipleCharacterLocations,
-            { name: 'Others', value: othersCount }
-          ]
+          ...multipleCharacterLocations,
+          { name: 'Others', value: othersCount }
+        ]
         : multipleCharacterLocations;
 
     return result.sort((a, b) => b.value - a.value);
@@ -63,34 +64,53 @@ export function LocationsChartSection({
 
   if (loading)
     return (
-      <S.Wrapper {...props}>
+      <div
+        {...props}
+        className={cn(
+          'flex w-full flex-col items-center justify-between',
+          props.className ?? ''
+        )}
+      >
         <h2>Characters by Location</h2>
 
-        <S.ChartWrapper>
+        <div className="flex h-[500px] w-full flex-col items-center justify-between">
           <Spinner />
-        </S.ChartWrapper>
-      </S.Wrapper>
+        </div>
+      </div>
     );
 
   if (error)
     return (
-      <S.Wrapper {...props}>
+      <div
+        {...props}
+        className={cn(
+          'flex w-full flex-col items-center justify-between',
+          props.className ?? ''
+        )}
+      >
         <h2>Characters by Location</h2>
-        <S.ChartWrapper>
+        <div className="flex h-[500px] w-full flex-col items-center justify-between">
           <Alert title="Error" description={error.message} />
-        </S.ChartWrapper>
-      </S.Wrapper>
+        </div>
+      </div>
     );
 
   return (
-    <S.Wrapper {...props}>
+    <div
+      {...props}
+      className={cn(
+        'flex w-full flex-col items-center justify-between',
+        'lg:sticky lg:top-0 lg:z-50',
+        props.className ?? ''
+      )}
+    >
       <h2>Characters by Location</h2>
 
-      <S.ChartWrapper>
+      <div className="flex h-[500px] w-full flex-col items-center justify-between">
         <LocationsChart chartData={chartData} />
 
         <ChartLegends chartData={chartData} />
-      </S.ChartWrapper>
-    </S.Wrapper>
+      </div>
+    </div>
   );
 }

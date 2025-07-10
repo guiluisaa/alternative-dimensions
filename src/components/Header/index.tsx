@@ -3,14 +3,12 @@
 import { BrandLogo } from '@components/BrandLogo';
 import { HeaderNav } from '@components/HeaderNav';
 
-import * as S from './styles';
-
 export function Header() {
   return (
-    <S.Wrapper>
+    <header className="flex items-center justify-between border-b border-neutral-lightGray bg-neutral-black px-6 py-3">
       <BrandLogo />
 
       <HeaderNav />
-    </S.Wrapper>
+    </header>
   );
 }

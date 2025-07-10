@@ -2,16 +2,18 @@
 
 import { ReactNode } from 'react';
 
-import * as S from './styles';
-
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <S.Wrapper>
-      <S.TitleWrapper>
-        <h2>Dashboard</h2>
-      </S.TitleWrapper>
+    <main className="flex flex-col items-center justify-center px-6">
+      <div className="mt-8 flex justify-center">
+        <h2 className="text-2xl font-bold">Dashboard</h2>
+      </div>
 
-      <S.Content>{children}</S.Content>
-    </S.Wrapper>
+      <div
+        className="flex flex-col gap-5 pt-12 lg:flex-row lg:items-start lg:justify-center"
+      >
+        {children}
+      </div>
+    </main>
   );
 }

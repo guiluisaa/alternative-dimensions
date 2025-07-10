@@ -5,11 +5,9 @@ import Link from 'next/link';
 
 import { Button } from '@ui/Button';
 
-import * as S from './styles';
-
 export default function Page() {
   return (
-    <S.Wrapper>
+    <main className="flex min-h-screen flex-col items-center justify-center gap-6 p-8">
       <Image
         alt="Alternative Dimensions Logo"
         src="/rick-and-morty-logo.png"
@@ -18,14 +16,14 @@ export default function Page() {
         priority
       />
 
-      <S.TextWrapper>
-        <h1>Welcome to Alternative Dimensions</h1>
-        <p>Keep track of your favorite Rick and Morty characters</p>
-      </S.TextWrapper>
+      <div className="text-center">
+        <h1 className="text-3xl font-bold">Welcome to Alternative Dimensions</h1>
+        <p className="text-lg">Keep track of your favorite Rick and Morty characters</p>
+      </div>
 
       <Link href="/dashboard">
-        <Button variant="primary">Dashboard</Button>
+        <Button>Dashboard</Button>
       </Link>
-    </S.Wrapper>
+    </main>
   );
 }

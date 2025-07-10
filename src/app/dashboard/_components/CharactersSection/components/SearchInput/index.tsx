@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 
-import * as S from './styles';
+import { Input } from '@ui/Input';
+import { IconButton } from '@ui/IconButton';
+import { Spinner } from '@ui/Spinner';
+import { cn } from '@/lib/cn';
 
 interface SearchInputProps {
   onSearch: (search: string) => void;
@@ -41,21 +44,31 @@ export function SearchInput({
   };
 
   return (
-    <S.Wrapper>
-      <S.Input
+    <div
+      className={cn(
+        'relative flex min-w-[400px] items-center',
+        loading ? 'opacity-80' : ''
+      )}
+    >
+      <Input
         type="text"
         placeholder="Search for a character"
         value={search}
         onChange={handleChange}
+        className="flex-1 pr-10"
       />
+
       {canClear && (
-        <S.CloseButton
+        <IconButton
           data-testid="SearchInput_clearButton"
           onClick={handleClear}
           name="close"
+          className="absolute right-3 top-3"
+          size={20}
         />
       )}
-      {loading && <S.Spinner />}
-    </S.Wrapper>
+
+      {loading && <Spinner size={20} className="absolute right-3 top-3" />}
+    </div>
   );
 }

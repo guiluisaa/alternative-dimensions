@@ -11,7 +11,6 @@ import { GetCharactersQuery } from '@/generated/graphql';
 
 import { CharacterRow } from '../CharacterRow';
 
-import * as S from './styles';
 
 type CharactersTableProps = {
   data?: GetCharactersQuery;
@@ -31,16 +30,16 @@ export function CharactersTable({
   const hasNextPage = !!data?.characters?.info?.next;
 
   const { lastElementRef } = useInfiniteScroll(
-    onLoadMore || (() => {}),
+    onLoadMore || (() => { }),
     !!isLoadingMore,
     hasNextPage
   );
 
   if (loading)
     return (
-      <S.SpinnerWrapper>
+      <div className="flex h-full w-full items-center justify-center">
         <Spinner data-testid="spinner" />
-      </S.SpinnerWrapper>
+      </div>
     );
 
   if (error) return <Alert title="Error" description={error.message} />;
@@ -51,8 +50,8 @@ export function CharactersTable({
   if (!data) return null;
 
   return (
-    <S.Wrapper>
-      <S.Table>
+    <div className="flex flex-col items-center justify-center gap-5 pb-8">
+      <table className="w-full">
         <thead>
           <tr>
             <TableHeaderCell>Avatar</TableHeaderCell>
@@ -73,13 +72,13 @@ export function CharactersTable({
             />
           ))}
         </tbody>
-      </S.Table>
+      </table>
 
       {isLoadingMore && (
-        <S.SpinnerWrapper>
+        <div className="flex w-full items-center justify-center">
           <Spinner data-testid="loading-more-spinner" />
-        </S.SpinnerWrapper>
+        </div>
       )}
-    </S.Wrapper>
+    </div>
   );
 }
