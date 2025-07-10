@@ -1,1 +1,1 @@
-export { Wrapper as TableHeaderCell } from './styles';
+export { TableHead as TableHeaderCell } from '@/components/ui/table';

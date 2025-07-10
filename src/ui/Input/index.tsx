@@ -1,1 +1,1 @@
-export { Wrapper as Input } from './styles';
+export { Input } from '@/components/ui/input';

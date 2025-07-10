@@ -1,11 +1,12 @@
 'use client';
 
-import { ButtonHTMLAttributes, ComponentProps } from 'react';
+import { Button as ShadcnButton } from "@/components/ui/button";
+import { ButtonHTMLAttributes } from 'react';
 
-import * as S from './styles';
-
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
-  ComponentProps<typeof S.Wrapper>;
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  variant?: 'primary' | 'secondary';
+  size?: 'sm' | 'md';
+};
 
 export function Button({
   children,
@@ -14,8 +15,8 @@ export function Button({
   ...props
 }: ButtonProps) {
   return (
-    <S.Wrapper variant={variant} size={size} {...props}>
+    <ShadcnButton variant={variant} size={size} {...props}>
       {children}
-    </S.Wrapper>
+    </ShadcnButton>
   );
 }

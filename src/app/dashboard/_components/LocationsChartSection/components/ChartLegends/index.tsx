@@ -4,24 +4,22 @@ import { HTMLAttributes } from 'react';
 
 import { ChartLegendItem } from '../ChartLegendItem';
 
-import * as S from './styles';
-
 type ChartLegendsProps = HTMLAttributes<HTMLDivElement> & {
   chartData: { name: string; value: number }[];
 };
 
 export function ChartLegends({ chartData, ...props }: ChartLegendsProps) {
   return (
-    <S.Wrapper {...props}>
+    <div className="flex flex-col items-center justify-center" {...props}>
       <h3>Legend</h3>
 
-      <S.List>
+      <div className="flex flex-wrap gap-2.5 justify-center items-center">
         {chartData.map((entry, index) => (
-          <S.ListItem key={entry.name}>
+          <div key={entry.name} className="flex items-center justify-center">
             <ChartLegendItem index={index} {...entry} />
-          </S.ListItem>
+          </div>
         ))}
-      </S.List>
-    </S.Wrapper>
+      </div>
+    </div>
   );
 }

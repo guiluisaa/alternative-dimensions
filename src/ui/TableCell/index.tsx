@@ -1,1 +1,1 @@
-export { Wrapper as TableCell } from './styles';
+export { TableCell } from '@/components/ui/table';

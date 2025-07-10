@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import * as S from './styles';
+import { Alert as ShadcnAlert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 
 type AlertProps = {
   title?: string;
@@ -9,9 +9,9 @@ type AlertProps = {
 
 export function Alert({ title, description }: AlertProps) {
   return (
-    <S.Wrapper>
-      <S.Title>{title}</S.Title>
-      {description && <S.Description>{description}</S.Description>}
-    </S.Wrapper>
+    <ShadcnAlert variant="destructive">
+      <AlertTitle>{title}</AlertTitle>
+      {description && <AlertDescription>{description}</AlertDescription>}
+    </ShadcnAlert>
   );
 }

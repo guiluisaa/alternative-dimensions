@@ -6,12 +6,11 @@ import { useInfiniteScroll } from '@lib/hooks/useInfiniteScroll';
 import { Alert } from '@ui/Alert';
 import { Spinner } from '@ui/Spinner';
 import { TableHeaderCell } from '@ui/TableHeaderCell';
+import { Table, TableHeader, TableBody } from '@/components/ui/table';
 
 import { GetCharactersQuery } from '@/generated/graphql';
 
 import { CharacterRow } from '../CharacterRow';
-
-import * as S from './styles';
 
 type CharactersTableProps = {
   data?: GetCharactersQuery;
@@ -31,16 +30,16 @@ export function CharactersTable({
   const hasNextPage = !!data?.characters?.info?.next;
 
   const { lastElementRef } = useInfiniteScroll(
-    onLoadMore || (() => {}),
+    onLoadMore || (() => { }),
     !!isLoadingMore,
     hasNextPage
   );
 
   if (loading)
     return (
-      <S.SpinnerWrapper>
+      <div className="flex justify-center items-center w-full h-full">
         <Spinner data-testid="spinner" />
-      </S.SpinnerWrapper>
+      </div>
     );
 
   if (error) return <Alert title="Error" description={error.message} />;
@@ -51,16 +50,16 @@ export function CharactersTable({
   if (!data) return null;
 
   return (
-    <S.Wrapper>
-      <S.Table>
-        <thead>
+    <div className="flex flex-col items-center justify-center gap-5 pb-8">
+      <Table>
+        <TableHeader>
           <tr>
             <TableHeaderCell>Avatar</TableHeaderCell>
             <TableHeaderCell>Name</TableHeaderCell>
             <TableHeaderCell>Location</TableHeaderCell>
           </tr>
-        </thead>
-        <tbody>
+        </TableHeader>
+        <TableBody>
           {data?.characters?.results?.map((character, index) => (
             <CharacterRow
               key={character?.id}
@@ -72,14 +71,14 @@ export function CharactersTable({
               }
             />
           ))}
-        </tbody>
-      </S.Table>
+        </TableBody>
+      </Table>
 
       {isLoadingMore && (
-        <S.SpinnerWrapper>
+        <div className="flex justify-center items-center w-full h-full">
           <Spinner data-testid="loading-more-spinner" />
-        </S.SpinnerWrapper>
+        </div>
       )}
-    </S.Wrapper>
+    </div>
   );
 }

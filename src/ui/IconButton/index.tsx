@@ -1,16 +1,22 @@
 import { ComponentProps } from 'react';
 
+import { Button } from '@/components/ui/button';
 import { Icon } from '@ui/Icon';
 
-import * as S from './styles';
-
-type IconButtonProps = ComponentProps<typeof S.Wrapper> &
-  ComponentProps<typeof Icon>;
+type IconButtonProps = Omit<ComponentProps<typeof Button>, 'size'> & {
+  name: ComponentProps<typeof Icon>['name'];
+  size?: number;
+};
 
 export function IconButton({ size = 20, name, ...props }: IconButtonProps) {
   return (
-    <S.Wrapper size={size} {...props}>
+    <Button
+      size="icon"
+      variant="secondary"
+      className="bg-transparent hover:bg-transparent text-neutral-dark-gray hover:text-neutral-deep-gray transition-colors"
+      {...props}
+    >
       <Icon size={size} name={name} />
-    </S.Wrapper>
+    </Button>
   );
 }

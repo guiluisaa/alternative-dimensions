@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* RESET CSS */
 
 *,
@@ -12,7 +16,7 @@ html,
 body {
   height: 100%;
   width: 100%;
-  font-family: sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -20,6 +24,9 @@ body {
 
 body {
   text-rendering: optimizeSpeed;
+  background-color: #FFF;
+  color: #121212;
+  transition: all 0.2s ease;
 }
 
 img,
@@ -54,4 +61,47 @@ ol {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+
+/* Custom utility classes */
+@layer utilities {
+  .transition-all {
+    transition: all 0.2s ease;
+  }
+}
+
+/* shadcn/ui component styles */
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 7%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 7%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 7%;
+    --primary: 0 0% 7%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 17% 35%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 210 17% 87%;
+    --muted-foreground: 210 17% 35%;
+    --accent: 210 17% 87%;
+    --accent-foreground: 0 0% 7%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 210 17% 87%;
+    --input: 210 17% 87%;
+    --ring: 215 100% 56%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-neutral-light-gray;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
 }

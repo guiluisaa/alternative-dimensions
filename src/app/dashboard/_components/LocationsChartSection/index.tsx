@@ -8,7 +8,6 @@ import { Spinner } from '@ui/Spinner';
 
 import { ChartLegends } from './components/ChartLegends';
 import { LocationsChart } from './components/LocationsChart';
-import * as S from './styles';
 
 export const COLORS = [
   '#0088FE',
@@ -53,9 +52,9 @@ export function LocationsChartSection({
     const result =
       othersCount > 0
         ? [
-            ...multipleCharacterLocations,
-            { name: 'Others', value: othersCount }
-          ]
+          ...multipleCharacterLocations,
+          { name: 'Others', value: othersCount }
+        ]
         : multipleCharacterLocations;
 
     return result.sort((a, b) => b.value - a.value);
@@ -63,34 +62,34 @@ export function LocationsChartSection({
 
   if (loading)
     return (
-      <S.Wrapper {...props}>
+      <div className="flex flex-col items-center justify-between w-full lg:sticky lg:top-0 lg:z-100" {...props}>
         <h2>Characters by Location</h2>
 
-        <S.ChartWrapper>
+        <div className="flex items-center flex-col justify-between h-[500px] w-full">
           <Spinner />
-        </S.ChartWrapper>
-      </S.Wrapper>
+        </div>
+      </div>
     );
 
   if (error)
     return (
-      <S.Wrapper {...props}>
+      <div className="flex flex-col items-center justify-between w-full lg:sticky lg:top-0 lg:z-100" {...props}>
         <h2>Characters by Location</h2>
-        <S.ChartWrapper>
+        <div className="flex items-center flex-col justify-between h-[500px] w-full">
           <Alert title="Error" description={error.message} />
-        </S.ChartWrapper>
-      </S.Wrapper>
+        </div>
+      </div>
     );
 
   return (
-    <S.Wrapper {...props}>
+    <div className="flex flex-col items-center justify-between w-full lg:sticky lg:top-0 lg:z-100" {...props}>
       <h2>Characters by Location</h2>
 
-      <S.ChartWrapper>
+      <div className="flex items-center flex-col justify-between h-[500px] w-full">
         <LocationsChart chartData={chartData} />
 
         <ChartLegends chartData={chartData} />
-      </S.ChartWrapper>
-    </S.Wrapper>
+      </div>
+    </div>
   );
 }

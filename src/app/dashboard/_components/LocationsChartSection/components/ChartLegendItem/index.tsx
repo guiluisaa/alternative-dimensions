@@ -1,7 +1,5 @@
 import { COLORS } from '../..';
 
-import * as S from './styles';
-
 type ChartLegendItemProps = {
   index: number;
   name: string;
@@ -10,11 +8,14 @@ type ChartLegendItemProps = {
 
 export function ChartLegendItem({ index, name, value }: ChartLegendItemProps) {
   return (
-    <S.Wrapper key={name}>
-      <S.Color color={COLORS[index % COLORS.length]} />
-      <S.Label>
+    <div key={name} className="flex items-center justify-center gap-1">
+      <div
+        className="w-3 h-3 rounded-sm"
+        style={{ backgroundColor: COLORS[index % COLORS.length] }}
+      />
+      <span className="text-xs">
         {name} ({value})
-      </S.Label>
-    </S.Wrapper>
+      </span>
+    </div>
   );
 }

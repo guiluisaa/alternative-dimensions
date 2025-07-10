@@ -1,1 +1,1 @@
-export { Wrapper as Spinner } from './styles';
+export { Spinner } from '@/components/ui/spinner';
