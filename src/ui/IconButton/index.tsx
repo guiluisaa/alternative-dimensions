@@ -1,16 +1,28 @@
-import { ComponentProps } from 'react';
+'use client';
+
+import { ButtonHTMLAttributes } from 'react';
 
 import { Icon } from '@ui/Icon';
 
-import * as S from './styles';
+import { cn } from '@/lib/cn';
 
-type IconButtonProps = ComponentProps<typeof S.Wrapper> &
-  ComponentProps<typeof Icon>;
+interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  size?: number;
+  name: 'close';
+}
 
-export function IconButton({ size = 20, name, ...props }: IconButtonProps) {
+export function IconButton({ size = 20, name, className, ...props }: IconButtonProps) {
   return (
-    <S.Wrapper size={size} {...props}>
+    <button
+      type="button"
+      className={cn(
+        'inline-flex items-center justify-center text-neutral-darkGray hover:text-neutral-deepGray transition-colors',
+        className
+      )}
+      style={{ width: size, height: size, fontSize: size }}
+      {...props}
+    >
       <Icon size={size} name={name} />
-    </S.Wrapper>
+    </button>
   );
 }
